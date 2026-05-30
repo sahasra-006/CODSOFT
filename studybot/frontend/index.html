@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyBot — AI Study Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">StudyBot</span>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" title="Toggle sidebar">‹</button>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="btn-new-session" id="btnNewSession">
+        <span>＋</span> New Session
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">SESSIONS</div>
+      <div class="sessions-list" id="sessionsList">
+        <div class="loading-sessions">Loading sessions...</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section pdf-section">
+      <div class="section-label">PDF DOCUMENTS</div>
+      <div class="pdf-upload-area" id="pdfUploadArea">
+        <input type="file" id="pdfFileInput" accept=".pdf" hidden />
+        <button class="btn-upload-pdf" id="btnUploadPDF">
+          <span class="upload-icon">↑</span>
+          <span>Upload PDF</span>
+        </button>
+      </div>
+      <div class="pdf-list" id="pdfList">
+        <div class="loading-pdfs">No PDFs uploaded yet</div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="footer-hint">Powered by SmolLM2</div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main" id="main">
+    <!-- Header -->
+    <header class="chat-header">
+      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+      <div class="session-title-wrap">
+        <h1 class="session-title" id="sessionTitle">Select a session</h1>
+        <span class="active-pdf-badge" id="activePdfBadge" style="display:none;"></span>
+      </div>
+      <div class="header-actions">
+        <button class="btn-icon" id="btnRenameSession" title="Rename session" style="display:none;">✎</button>
+      </div>
+    </header>
+
+    <!-- Chat area -->
+    <div class="chat-area" id="chatArea">
+      <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-icon">⬡</div>
+        <h2>Welcome to StudyBot</h2>
+        <p>Your AI-powered study companion. Create a new session or select an existing one to start learning.</p>
+        <div class="welcome-tips">
+          <div class="tip-card">
+            <span class="tip-icon">💬</span>
+            <span>Ask anything: <em>"Explain recursion"</em></span>
+          </div>
+          <div class="tip-card">
+            <span class="tip-icon">📄</span>
+            <span>Upload a PDF and ask questions about it</span>
+          </div>
+          <div class="tip-card">
+            <span class="tip-icon">📚</span>
+            <span>Type <em>"study tips"</em> or <em>"exam tips"</em></span>
+          </div>
+        </div>
+        <button class="btn-start" id="btnStart">Start Studying →</button>
+      </div>
+      <div class="messages-container" id="messagesContainer"></div>
+    </div>
+
+    <!-- Input area -->
+    <div class="input-area" id="inputArea">
+      <div class="input-wrapper">
+        <textarea
+          id="messageInput"
+          placeholder="Ask a question, explain a concept, or ask about your PDF..."
+          rows="1"
+          disabled
+        ></textarea>
+        <button class="btn-send" id="btnSend" disabled>
+          <span class="send-icon">↑</span>
+        </button>
+      </div>
+      <div class="input-hint">
+        <span id="pdfHint"></span>
+        <span>Press Enter to send · Shift+Enter for new line</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rename Modal -->
+  <div class="modal-overlay" id="renameModal" style="display:none;">
+    <div class="modal">
+      <h3>Rename Session</h3>
+      <input type="text" id="renameInput" placeholder="Session name..." maxlength="60" />
+      <div class="modal-actions">
+        <button class="btn-cancel" id="btnRenameCancel">Cancel</button>
+        <button class="btn-confirm" id="btnRenameConfirm">Rename</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
