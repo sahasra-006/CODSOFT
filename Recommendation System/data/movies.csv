@@ -1,0 +1,31 @@
+movie_id,title,genre,description,avg_rating,year
+1,The Dark Knight,Action|Crime|Drama,A vigilante Batman fights the Joker who plans to bring chaos to Gotham City in a battle of wills and morality.,9.0,2008
+2,Inception,Sci-Fi|Action|Thriller,A thief who enters people's dreams to steal secrets is given the task of planting an idea instead.,8.8,2010
+3,Interstellar,Sci-Fi|Drama|Adventure,A group of astronauts travel through a wormhole near Saturn to find a new home for humanity as Earth dies.,8.6,2014
+4,The Matrix,Sci-Fi|Action,A hacker discovers that reality is a simulation and joins a rebellion against the machines that control humanity.,8.7,1999
+5,Pulp Fiction,Crime|Drama|Thriller,Interconnected stories of crime and redemption follow hitmen philosophical conversations and a mysterious briefcase.,8.9,1994
+6,Forrest Gump,Drama|Romance,A man with low IQ accidentally influences several historical events while looking for his childhood sweetheart.,8.8,1994
+7,The Shawshank Redemption,Drama|Crime,A banker is sentenced to life in Shawshank prison and finds hope through the friendship of a fellow inmate.,9.3,1994
+8,Goodfellas,Crime|Drama|Biography,The story of Henry Hill and his rise and fall in the mob highlighting the seductive appeal of gangster life.,8.7,1990
+9,Fight Club,Drama|Thriller,An insomniac office worker forms an underground fight club with a soap salesman that evolves into something more sinister.,8.8,1999
+10,The Silence of the Lambs,Thriller|Crime|Horror,An FBI trainee seeks the help of imprisoned cannibalistic killer Hannibal Lecter to catch another serial killer.,8.6,1991
+11,Avengers Endgame,Action|Sci-Fi|Adventure,The Avengers assemble one last time to undo the damage caused by Thanos and restore balance to the universe.,8.4,2019
+12,Spider-Man No Way Home,Action|Sci-Fi|Adventure,Peter Parker seeks help from Doctor Strange to make people forget he is Spider-Man but the spell goes wrong.,8.3,2021
+13,The Prestige,Drama|Mystery|Thriller,Two rival magicians in 19th century London obsessively compete to create the ultimate illusion at great personal cost.,8.5,2006
+14,Memento,Mystery|Thriller|Crime,A man with short-term memory loss uses notes and tattoos to hunt the killer of his wife working backwards in time.,8.4,2000
+15,Whiplash,Drama|Music,A young drummer at a top music conservatory pushes himself to his limits under the brutally demanding conductor.,8.5,2014
+16,La La Land,Romance|Drama|Music,A jazz musician and an aspiring actress fall in love in Los Angeles but their dreams begin to pull them apart.,8.0,2016
+17,Joker,Crime|Drama|Thriller,The origin story of Arthur Fleck a failed comedian who slowly descends into madness and becomes the Joker.,8.4,2019
+18,1917,War|Drama|Action,Two British soldiers are sent on a dangerous mission through enemy territory to deliver a message that could save 1600 lives.,8.3,2019
+19,Parasite,Drama|Thriller|Comedy,A poor family schemes to become employed by a wealthy family and things take a dark unexpected turn.,8.6,2019
+20,Get Out,Horror|Mystery|Thriller,A Black man visits his white girlfriend's family estate and uncovers a disturbing secret hidden beneath their seemingly welcoming behavior.,7.7,2017
+21,Hereditary,Horror|Drama|Mystery,After the death of her secretive mother a woman and her family are haunted by dark and terrifying secrets.,7.3,2018
+22,The Grand Budapest Hotel,Comedy|Adventure|Drama,A famous concierge and his protege become embroiled in a murder mystery involving stolen paintings and a family fortune.,8.1,2014
+23,Mad Max Fury Road,Action|Adventure|Sci-Fi,In a post-apocalyptic wasteland a woman rebels against a tyrant and flees across the desert with a group of female prisoners.,8.1,2015
+24,Baby Driver,Action|Crime|Music,A young getaway driver finds himself forced to work for a crime boss but romance and loyalty complicate his escape plan.,7.6,2017
+25,Knives Out,Mystery|Crime|Comedy,A detective investigates the death of a wealthy crime novelist after his entire dysfunctional family gathers for his birthday.,7.9,2019
+26,Coco,Animation|Adventure|Family,A young boy accidentally travels to the Land of the Dead and learns his family history while searching for his musician ancestor.,8.4,2017
+27,Soul,Animation|Comedy|Drama,A jazz musician accidentally gets separated from his soul before a big performance and must find his way back to his body.,8.1,2020
+28,Your Name,Animation|Romance|Drama,Two teenagers who have never met begin switching bodies and must find each other before a comet threatens their lives.,8.4,2016
+29,Spirited Away,Animation|Adventure|Fantasy,A 10-year-old girl wanders into a world ruled by gods and witches and must find a way to free her transformed parents.,8.6,2001
+30,Princess Mononoke,Animation|Action|Adventure,A prince becomes embroiled in a conflict between forest gods and an industrializing mining town that threatens nature.,8.4,1997

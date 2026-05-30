@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Captioning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<!-- ── Atmospheric background blur derived from uploaded image ── -->
+<div id="atmosphere" class="atmosphere" aria-hidden="true"></div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  LAYOUT: [Sidebar] [Workspace] [Caption Panel]             -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="shell">
+
+  <!-- ── SIDEBAR ─────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="wordmark">Image Captioning</span>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Recent</p>
+      <ul class="history-list" id="historyList">
+        <li class="history-empty">No captions yet</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-footer">
+      <span class="device-badge" id="deviceBadge">— CPU</span>
+      <span class="version-tag">v1.0</span>
+    </div>
+  </aside>
+
+  <!-- ── MAIN WORKSPACE ──────────────────────────────────── -->
+  <main class="workspace" id="workspace">
+
+    <!-- Drop Zone / Image Preview -->
+    <div class="image-stage" id="imageStage">
+
+      <!-- Empty state -->
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" accept="image/*" hidden />
+
+        <div class="drop-inner">
+          <div class="drop-icon-wrap">
+            <svg class="drop-icon" viewBox="0 0 64 64" fill="none">
+              <rect x="8" y="14" width="48" height="36" rx="4" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="22" cy="27" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M8 40l14-12 10 10 8-8 16 18" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M32 2v20M26 8l6-6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="drop-headline">Drop an image to interpret</p>
+          <p class="drop-sub">or <button class="inline-btn" id="browseBtn">browse files</button></p>
+          <p class="drop-formats">JPEG · PNG · WebP · BMP up to 10 MB</p>
+        </div>
+      </div>
+
+      <!-- Image preview (hidden until upload) -->
+      <div class="image-preview hidden" id="imagePreview">
+        <img id="previewImg" src="" alt="Uploaded image" />
+        <button class="replace-btn" id="replaceBtn" title="Replace image">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M4 4h12M4 10h12M4 16h8"/></svg>
+          Replace
+        </button>
+      </div>
+
+      <!-- AI thinking overlay -->
+      <div class="thinking-overlay hidden" id="thinkingOverlay">
+        <div class="thinking-content">
+          <div class="thinking-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <p class="thinking-text" id="thinkingText">Interpreting visual story…</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Style selector (shown after image load) -->
+    <div class="style-bar hidden" id="styleBar">
+      <p class="style-bar-label">Caption style</p>
+      <div class="style-pills">
+        <button class="style-pill active" data-style="descriptive">Descriptive</button>
+        <button class="style-pill" data-style="cinematic">Cinematic</button>
+        <button class="style-pill" data-style="poetic">Poetic</button>
+        <button class="style-pill" data-style="social">Social</button>
+        <button class="style-pill" data-style="documentary">Documentary</button>
+      </div>
+      <button class="generate-btn" id="generateBtn">
+        <span class="generate-label">Generate Caption</span>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="16"><path d="M4 10h12M12 5l5 5-5 5"/></svg>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ── CAPTION PANEL ───────────────────────────────────── -->
+  <section class="caption-panel" id="captionPanel">
+
+    <div class="panel-top">
+      <h2 class="panel-heading">Interpretation</h2>
+      <span class="panel-style-tag" id="panelStyleTag"></span>
+    </div>
+
+    <!-- Empty state -->
+    <div class="caption-empty" id="captionEmpty">
+      <p>Upload an image and select a style to begin.</p>
+    </div>
+
+    <!-- Skeleton loader -->
+    <div class="caption-skeleton hidden" id="captionSkeleton">
+      <div class="skel-line w-full"></div>
+      <div class="skel-line w-4/5"></div>
+      <div class="skel-line w-3/5"></div>
+    </div>
+
+    <!-- Generated caption -->
+    <div class="caption-result hidden" id="captionResult">
+      <blockquote class="caption-text" id="captionText"></blockquote>
+      <div class="caption-meta" id="captionMeta"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="panel-actions hidden" id="panelActions">
+      <button class="action-btn" id="copyBtn" title="Copy caption">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="15"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M3 13V5a2 2 0 012-2h8"/></svg>
+        Copy
+      </button>
+      <button class="action-btn" id="downloadBtn" title="Download as .txt">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="15"><path d="M10 3v10M6 9l4 4 4-4"/><path d="M3 17h14"/></svg>
+        Download
+      </button>
+      <button class="action-btn" id="regenerateBtn" title="Regenerate">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="15"><path d="M4 10a6 6 0 016-6 6 6 0 014.47 2M16 10a6 6 0 01-6 6 6 6 0 01-4.47-2"/><path d="M4 6v4h4M16 14v-4h-4"/></svg>
+        Retry
+      </button>
+    </div>
+
+    <!-- Error state -->
+    <div class="caption-error hidden" id="captionError">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="18"><circle cx="10" cy="10" r="8"/><path d="M10 6v5M10 14h.01"/></svg>
+      <p id="errorText">Something went wrong.</p>
+    </div>
+
+  </section>
+
+</div><!-- .shell -->
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
